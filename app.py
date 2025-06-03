@@ -5,16 +5,19 @@ def caesar_cipher(text, shift, alphabet):
     # Loop through each character in the text
     for char in text:
         # If it's in the alphabet, apply the cipher
-        if char.isalpha():
+        if char.isalpha() and char.lower() in alphabet:
             start_index = alphabet.index(char.lower())  # Find the position of the character
             new_index = (start_index + shift) % alphabet_length  # Shift and wrap around the alphabet
             new_char = alphabet[new_index]
-            
+
             # Maintain the case (upper or lower)
             if char.isupper():
                 result.append(new_char.upper())
             else:
                 result.append(new_char)
+        elif char.isalpha():
+            # Alphabet provided doesn't contain this character; keep it unchanged
+            result.append(char)
         else:
             # If it's not a letter, keep the character unchanged
             result.append(char)
